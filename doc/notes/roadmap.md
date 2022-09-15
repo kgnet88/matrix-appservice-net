@@ -7,9 +7,12 @@
 - [ ] partial port of matrix-appservice-node to C#: 
     - no health endpoint
     - no server tls certificate
+    - [ ] real autentication and authorization
+    - [ ] use of mediator pattern and request validation
+    - [ ] real registration validation (see [here](https://spec.matrix.org/v1.3/appendices/#common-namespaced-identifier-grammar))
+    - [ ] application service instance dependent error codes
 - [ ] use of FastEndpoints
 - [ ] 100% integration tests for endpoints 
-- [ ] swagger documentation
 - [ ] better example service
     - [ ] tested with own homeserver instance
     - [ ] real registration
