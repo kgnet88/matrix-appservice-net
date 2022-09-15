@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<EnforceCodeStyleInBuild>False</EnforceCodeStyleInBuild>
+		<AnalysisLevel>preview-all</AnalysisLevel>
+		<RootNamespace>KgNet88.Matrix.AppService.Api.Sdk</RootNamespace>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<LangVersion>preview</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<LangVersion>preview</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FastEndpoints.Swagger" Version="5.1.0" />
+		<PackageReference Include="ValueOf" Version="2.0.31" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AppService.Api.Sdk.Contracts\AppService.Api.Sdk.Contracts.csproj" />
+	</ItemGroup>
+
+</Project>
