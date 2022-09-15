@@ -2,6 +2,21 @@
 
 ## POC
 
+### matrix-appservice-net POC v0.2
+
+- [ ] partial port of matrix-appservice-node to C#: 
+    - no health endpoint
+    - no server tls certificate
+- [ ] use of FastEndpoints
+- [ ] 100% integration tests for endpoints 
+- [ ] swagger documentation
+- [ ] better example service
+    - [ ] tested with own homeserver instance
+    - [ ] real registration
+    - [ ] optional with event loop 
+- [ ] docfx documentation
+
+
 ### matrix-appservice-net POC v0.1 (done)
 
 - [x] partial port of matrix-appservice-node to C#: 
