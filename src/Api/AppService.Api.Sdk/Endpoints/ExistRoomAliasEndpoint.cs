@@ -33,7 +33,7 @@ public sealed class ExistRoomAliasEndpoint : Endpoint<ExistRoomAliasRequest>
     /// <seealso href="https://spec.matrix.org/v1.3/application-service-api/#legacy-routes">Legacy Routes</seealso>
     public override void Configure()
     {
-        this.Get("/rooms/{roomAlias}", "/_matrix/app/v1/rooms/{roomAlias}");
+        this.Get("rooms/{roomAlias}", "_matrix/app/v1/rooms/{roomAlias}");
         this.AllowAnonymous();
     }
 

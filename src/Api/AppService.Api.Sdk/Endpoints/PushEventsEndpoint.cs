@@ -32,7 +32,7 @@ public sealed class PushEventsEndpoint : Endpoint<PushEventsRequest>
     /// </seealso>
     public override void Configure()
     {
-        this.Put("/_matrix/app/v1/transactions/{txnId}");
+        this.Put("_matrix/app/v1/transactions/{txnId}");
         this.AllowAnonymous();
     }
 

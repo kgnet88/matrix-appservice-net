@@ -2,7 +2,7 @@
 
 ## POC
 
-### matrix-appservice-net POC v0.1
+### matrix-appservice-net POC v0.1 (done)
 
 - [x] partial port of matrix-appservice-node to C#: 
     - no registration generation
@@ -13,7 +13,7 @@
     - no event loop
 - [x] .net 7
 - [x] use of FastEndpoints
-- [ ] 100% integration tests for endpoints 
+- [x] 100% integration tests for endpoints 
 - [x] swagger documentation
 - [x] example service
 - [x] complete c# documentation for docfx

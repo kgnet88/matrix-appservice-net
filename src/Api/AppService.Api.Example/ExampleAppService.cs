@@ -1,6 +1,8 @@
 ﻿namespace KgNet88.Matrix.AppService.Api.Example;
 
-public static class ExampleAppService
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1102:Make class static.", Justification = "Reflection")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S1118:Utility classes should not have public constructors", Justification = "Reflection")]
+public class ExampleAppService
 {
     public static void Main(string[] args)
     {
@@ -34,12 +36,12 @@ public static class ExampleAppService
             OnExistUserQueryAsync = (req, _) =>
             {
                 Console.WriteLine($"User Id: {req.UserId}");
-                return Task.FromResult((HttpStatusCode.OK, ""));
+                return Task.FromResult<(HttpStatusCode, string?)>((HttpStatusCode.OK, null));
             },
             OnExistRoomAliasQueryAsync = (req, _) =>
             {
                 Console.WriteLine($"Room alias: {req.RoomAlias}");
-                return Task.FromResult((HttpStatusCode.OK, ""));
+                return Task.FromResult<(HttpStatusCode, string?)>((HttpStatusCode.OK, null));
             }
         };
 

@@ -33,7 +33,7 @@ public sealed class ExistUserEndpoint : Endpoint<ExistUserRequest>
     /// <seealso href="https://spec.matrix.org/v1.3/application-service-api/#legacy-routes">Legacy Routes</seealso>
     public override void Configure()
     {
-        this.Get("/users/{userId}", "/_matrix/app/v1/users/{userId}");
+        this.Get("users/{userId}", "_matrix/app/v1/users/{userId}");
         this.AllowAnonymous();
     }
 

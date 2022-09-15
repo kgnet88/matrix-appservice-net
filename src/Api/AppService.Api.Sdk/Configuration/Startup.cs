@@ -51,12 +51,13 @@ public static class Startup
     {
         _ = app.UseMiddleware<HttpExceptionMiddleware>();
 
+        var options = app.Services.GetRequiredService<AppServiceEndpointOptions>();
+
         _ = app.UseFastEndpoints(c =>
         {
             c.Serializer.Options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
             c.Endpoints.ShortNames = true;
-            c.Endpoints.Configurator = ep => ep.PreProcessors(
-                new AuthPreProcessor(app.Services.GetRequiredService<AppServiceEndpointOptions>()));
+            c.Endpoints.Configurator = ep => ep.PreProcessors(new AuthPreProcessor(options));
         });
 
         _ = app.UseOpenApi();

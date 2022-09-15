@@ -20,6 +20,6 @@ public sealed class PushEventsSummary : Summary<PushEventsEndpoint, PushEventsRe
         this.Response(200, "The transaction was processed successfully.");
         this.Response(401, "The homeserver has not supplied credentials to the application service.");
         this.Response(403, "The credentials supplied by the homeserver were rejected.");
-        this.Response(404, "The application service indicates that this endpoint not implemented is.");
+        this.Response(404, "The application service indicates that this endpoint is not implemented.");
     }
 }

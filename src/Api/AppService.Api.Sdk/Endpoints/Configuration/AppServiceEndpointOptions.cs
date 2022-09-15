@@ -22,7 +22,7 @@ public sealed class AppServiceEndpointOptions
     /// </item>
     /// </list>
     /// </summary>
-    public Func<ExistRoomAliasRequest, CancellationToken, Task<(HttpStatusCode, string)>> OnExistRoomAliasQueryAsync { get; set; }
+    public Func<ExistRoomAliasRequest, CancellationToken, Task<(HttpStatusCode, string?)>> OnExistRoomAliasQueryAsync { get; set; }
         = (_, _) => throw HttpErrors.NotImplemented("ExistRoomAlias");
 
     /// <summary>
@@ -37,7 +37,7 @@ public sealed class AppServiceEndpointOptions
     /// </item>
     /// </list>
     /// </summary>
-    public Func<ExistUserRequest, CancellationToken, Task<(HttpStatusCode, string)>> OnExistUserQueryAsync { get; set; }
+    public Func<ExistUserRequest, CancellationToken, Task<(HttpStatusCode, string?)>> OnExistUserQueryAsync { get; set; }
         = (_, _) => throw HttpErrors.NotImplemented("ExistUser");
 
     /// <summary>
