@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0516CA09-F3E4-4190-934B-5E64207B7A13}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{D339E9FC-4B80-439E-8CDE-57457A03CD10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{38858AB7-0086-4148-862D-75E27C71A003}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1ADB0F99-104B-4E5F-B8FE-A1CF516AEC36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{BC55057E-F717-418D-9817-00E6268A37BF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppService.Api.Sdk", "src\Api\AppService.Api.Sdk\AppService.Api.Sdk.csproj", "{D4D657C5-3A4D-4584-B95C-3335B0D8E5F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppService.Api.Sdk.Contracts", "src\Api\AppService.Api.Sdk.Contracts\AppService.Api.Sdk.Contracts.csproj", "{02573314-A585-49BD-A300-D0663BE3C281}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "notes", "notes", "{A12FDBAC-F021-4CD3-87A3-36B2F962CDAA}"
+	ProjectSection(SolutionItems) = preProject
+		doc\notes\roadmap.md = doc\notes\roadmap.md
+		doc\notes\unsorted.md = doc\notes\unsorted.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx", "docfx", "{118F5E58-107E-4B74-B495-785ECBDD8F6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppService.Api.Example", "src\Api\AppService.Api.Example\AppService.Api.Example.csproj", "{602DF0C0-EE5D-445C-BB5C-E907D94CC273}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4D657C5-3A4D-4584-B95C-3335B0D8E5F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4D657C5-3A4D-4584-B95C-3335B0D8E5F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4D657C5-3A4D-4584-B95C-3335B0D8E5F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4D657C5-3A4D-4584-B95C-3335B0D8E5F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02573314-A585-49BD-A300-D0663BE3C281}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02573314-A585-49BD-A300-D0663BE3C281}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02573314-A585-49BD-A300-D0663BE3C281}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02573314-A585-49BD-A300-D0663BE3C281}.Release|Any CPU.Build.0 = Release|Any CPU
+		{602DF0C0-EE5D-445C-BB5C-E907D94CC273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{602DF0C0-EE5D-445C-BB5C-E907D94CC273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{602DF0C0-EE5D-445C-BB5C-E907D94CC273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{602DF0C0-EE5D-445C-BB5C-E907D94CC273}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC55057E-F717-418D-9817-00E6268A37BF} = {1ADB0F99-104B-4E5F-B8FE-A1CF516AEC36}
+		{D4D657C5-3A4D-4584-B95C-3335B0D8E5F8} = {BC55057E-F717-418D-9817-00E6268A37BF}
+		{02573314-A585-49BD-A300-D0663BE3C281} = {BC55057E-F717-418D-9817-00E6268A37BF}
+		{A12FDBAC-F021-4CD3-87A3-36B2F962CDAA} = {D339E9FC-4B80-439E-8CDE-57457A03CD10}
+		{118F5E58-107E-4B74-B495-785ECBDD8F6B} = {D339E9FC-4B80-439E-8CDE-57457A03CD10}
+		{602DF0C0-EE5D-445C-BB5C-E907D94CC273} = {BC55057E-F717-418D-9817-00E6268A37BF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF5E5C31-2839-4BA3-9476-BAF6CDF175CD}
+	EndGlobalSection
+EndGlobal
