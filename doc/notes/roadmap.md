@@ -2,7 +2,7 @@
 
 ## POC
 
-### matrix-appservice-net POC v0.2
+### matrix-appservice-net POC v0.2 (current)
 
 - [ ] partial port of matrix-appservice-node to C#: 
     - no health endpoint
