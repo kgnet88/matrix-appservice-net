@@ -13,13 +13,13 @@ public sealed class PushEventsEndpoint : Endpoint<PushEventsRequest>
     /// <summary>
     /// Userdefined and application service specific endpoint options.
     /// </summary>
-    private readonly AppServiceEndpointOptions _options;
+    private readonly AppServiceEndpointSettings _options;
 
     /// <summary>
     /// Injects endpoint options to make them available.
     /// </summary>
     /// <param name="options">Injected endpoint options.</param>
-    public PushEventsEndpoint(AppServiceEndpointOptions options)
+    public PushEventsEndpoint(AppServiceEndpointSettings options)
     {
         this._options = options;
     }

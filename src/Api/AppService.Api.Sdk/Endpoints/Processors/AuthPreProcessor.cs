@@ -5,32 +5,28 @@ internal sealed class AuthPreProcessor : IGlobalPreProcessor
     /// <summary>
     /// Userdefined and application service specific endpoint options.
     /// </summary>
-    private readonly AppServiceEndpointOptions _options;
+    private readonly Registration _registration;
 
     /// <summary>
-    /// Injects endpoint options to make them available.
+    /// Injects registration to make them available.
     /// </summary>
-    /// <param name="options">Injected endpoint options.</param>
-    public AuthPreProcessor(AppServiceEndpointOptions options)
+    /// <param name="registration">Injected endpoint options.</param>
+    public AuthPreProcessor(Registration registration)
     {
-        this._options = options;
+        this._registration = registration;
     }
 
     public Task PreProcessAsync(object req, HttpContext ctx, List<ValidationFailure> failures, CancellationToken ct)
     {
-        if (req is BaseRequest request)
+        if (!ctx.Request.Query.ContainsKey("access_token"))
         {
-            if (request.AccessToken is null)
-            {
-                throw HttpErrors.NotAuthorized();
-            }
-
-            if (request.AccessToken != this._options.HomeserverToken.Value.Token)
-            {
-                throw HttpErrors.Forbidden();
-            }
+            throw HttpErrors.NotAuthorized();
         }
 
-        return Task.CompletedTask;
+        string token = ctx.Request.Query["access_token"].ToString();
+
+        return token != this._registration.HomeserverToken.Value.Token
+            ? throw HttpErrors.Forbidden()
+            : Task.CompletedTask;
     }
 }

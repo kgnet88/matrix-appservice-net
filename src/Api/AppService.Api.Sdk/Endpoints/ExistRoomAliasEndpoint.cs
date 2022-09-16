@@ -13,13 +13,13 @@ public sealed class ExistRoomAliasEndpoint : Endpoint<ExistRoomAliasRequest>
     /// <summary>
     /// Userdefined and application service specific endpoint options.
     /// </summary>
-    private readonly AppServiceEndpointOptions _options;
+    private readonly AppServiceEndpointSettings _options;
 
     /// <summary>
     /// Injects endpoint options to make them available.
     /// </summary>
     /// <param name="options">Injected endpoint options.</param>
-    public ExistRoomAliasEndpoint(AppServiceEndpointOptions options)
+    public ExistRoomAliasEndpoint(AppServiceEndpointSettings options)
     {
         this._options = options;
     }

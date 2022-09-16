@@ -17,6 +17,16 @@ public sealed class PushEventsSummary : Summary<PushEventsEndpoint, PushEventsRe
             "Note that the application service should distinguish state events from message events via the presence " +
             "of a `state_key`, rather than via the event type.";
 
+        this.RequestParam(x => x.AccessToken, "Access token containing the <c>hs_token</c> from " +
+            "the application service’s registration");
+
+        this.RequestParam(x => x.ClientEvents, "<b>Required</b>: A list of events, formatted as " +
+            "per the Client-Server API.");
+
+        this.Params = new Dictionary<string, string>() { { "txnId", "<b>Required</b>: The transaction ID for this " +
+                "set of events. Homeservers generate these IDs and they are used to ensure idempotency of " +
+                "requests." } };
+
         this.Response(200, "The transaction was processed successfully.");
         this.Response(401, "The homeserver has not supplied credentials to the application service.");
         this.Response(403, "The credentials supplied by the homeserver were rejected.");

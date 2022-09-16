@@ -3,21 +3,21 @@
 /// <summary>
 /// SDKs default implementation of the registration service.
 /// </summary>
-public sealed class RegistrationService : IRegistrationService
+public static class RegistrationService
 {
     /// <summary>
     /// The service tries to load a valid application service registration from the yaml file at the specified path.
     /// </summary>
     /// <param name="path">The application service registrations path.</param>
     /// <returns>If successful it returns the loaded application service registration.</returns>
-    public async Task<Registration?> LoadRegistrationAsync(string path)
+    public static Registration? LoadRegistrationFromFile(string path)
     {
         if (!File.Exists(path))
         {
             return null;
         }
 
-        string fileInput = await File.ReadAllTextAsync(path);
+        string fileInput = File.ReadAllText(path);
         var input = new StringReader(fileInput);
 
         var deserializer = new DeserializerBuilder().Build();
@@ -32,7 +32,7 @@ public sealed class RegistrationService : IRegistrationService
                 Url = Url.From(yamlRegistration.Url),
                 AccessToken = Token.From((TokenType.Access, yamlRegistration.AccessToken)),
                 HomeserverToken = Token.From((TokenType.Homeserver, yamlRegistration.HomeserverToken)),
-                Localpart = SenderLocalpart.From(yamlRegistration.LocalPart),
+                Localpart = SenderLocalpart.From(yamlRegistration.Localpart),
                 Users = yamlRegistration.Namespaces.Users.ConvertAll(
                 x => Namespace.From(new NamespaceFields { Exclusive = x.Exclusive, Regex = x.Regex })),
                 Aliases = yamlRegistration.Namespaces.Aliases.ConvertAll(
@@ -45,11 +45,46 @@ public sealed class RegistrationService : IRegistrationService
     }
 
     /// <summary>
+    /// The service tries to load a valid application service registration from the configuration file.
+    /// </summary>
+    /// <param name="configuration"></param>
+    /// <returns>If successful it returns the loaded application service registration.</returns>
+    public static Registration? LoadRegistrationFromConfiguration(IConfiguration configuration)
+    {
+        var appServiceRegistration = new AppSettingsRegistration();
+        var section = configuration.GetSection(AppSettingsRegistration.Section);
+
+        if (section is null)
+        {
+            return null;
+        }
+
+        section.Bind(appServiceRegistration);
+
+        return new Registration
+        {
+            Id = Model.ApplicationId.From(appServiceRegistration.Id),
+            Url = Url.From(appServiceRegistration.Url),
+            AccessToken = Token.From((TokenType.Access, appServiceRegistration.AccessToken)),
+            HomeserverToken = Token.From((TokenType.Homeserver, appServiceRegistration.HomeserverToken)),
+            Localpart = SenderLocalpart.From(appServiceRegistration.Localpart),
+            Users = appServiceRegistration.Namespaces.Users.ConvertAll(
+            x => Namespace.From(new NamespaceFields { Exclusive = x.Exclusive, Regex = x.Regex })),
+            Aliases = appServiceRegistration.Namespaces.Aliases.ConvertAll(
+            x => Namespace.From(new NamespaceFields { Exclusive = x.Exclusive, Regex = x.Regex })),
+            Rooms = appServiceRegistration.Namespaces.Rooms.ConvertAll(
+            x => Namespace.From(new NamespaceFields { Exclusive = x.Exclusive, Regex = x.Regex })),
+            RateLimited = appServiceRegistration.RateLimited,
+            Protocols = appServiceRegistration.Protocols.ConvertAll(Protocol.From)
+        };
+    }
+
+    /// <summary>
     /// The service tries to save the given application service registration as yaml file under the given path.
     /// </summary>
     /// <param name="registration">The registration to be saved.</param>
     /// <param name="path">The application service registrations path.</param>
-    public async Task WriteRegistrationAsync(Registration registration, string path)
+    public static void WriteRegistrationToFile(Registration registration, string path)
     {
         var yamlRegistration = new YamlRegistration
         {
@@ -57,7 +92,7 @@ public sealed class RegistrationService : IRegistrationService
             Url = registration.Url.Value,
             AccessToken = registration.AccessToken.Value.Token,
             HomeserverToken = registration.HomeserverToken.Value.Token,
-            LocalPart = registration.Localpart.Value,
+            Localpart = registration.Localpart.Value,
             Namespaces = new YamlNamespaces
             {
                 Users = registration.Users.ConvertAll(x => new YamlNamespace { Exclusive = x.Value.Exclusive, Regex = x.Value.Regex }),
@@ -71,7 +106,7 @@ public sealed class RegistrationService : IRegistrationService
         var serializer = new SerializerBuilder().Build();
         string yaml = serializer.Serialize(yamlRegistration);
 
-        await File.WriteAllTextAsync(path, yaml);
+        File.WriteAllText(path, yaml);
     }
 
     /// <summary>
