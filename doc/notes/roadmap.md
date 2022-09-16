@@ -39,5 +39,5 @@
 - handling of `txnId` must be improved
 - error codes should be service specific
 - no support for event handling
-- handling of query parameter `access_token` not optimal, real auth needed
+- handling of query parameter `access_token` not optimal
 - saving and loading of the yaml registration needs to be refactored
