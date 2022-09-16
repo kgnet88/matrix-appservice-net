@@ -17,7 +17,12 @@ public sealed class ExistUserSummary : Summary<ExistUserEndpoint, ExistUserReque
             "`users` namespace. The homeserver will send this request when it receives an event for an unknown user " +
             "ID in the application service’s namespace, such as a room invite.";
 
-        this.ExampleRequest = new ExistUserRequest() { UserId = "@user:example.com" };
+        this.RequestParam(x => x.AccessToken, "Access token containing the <c>hs_token</c> from " +
+            "the application service’s registration");
+
+        this.RequestParam(x => x.UserId, "<b>Required:</b> The user ID being queried.");
+
+        this.ExampleRequest = new ExistUserRequest() { UserId = "user" };
 
         this.Response(200, "The application service indicates that this user exists.");
         this.Response(401, "The homeserver has not supplied credentials to the application service.");

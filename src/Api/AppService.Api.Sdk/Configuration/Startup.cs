@@ -18,27 +18,70 @@ public static class Startup
     }
 
     /// <summary>
+    /// Injects the registration into the application service. Loads the registration from file beforehand.
+    /// </summary>
+    /// <param name="services">The application services existing service collection.</param>
+    /// <param name="registrationPath">The application services registration file.</param>
+    public static IServiceCollection AddAppServiceRegistration(this IServiceCollection services, string registrationPath)
+    {
+        var registration = RegistrationService.LoadRegistrationFromFile(registrationPath);
+
+        if (registration is null)
+        {
+            Console.WriteLine("Registration is not valid!");
+            Environment.Exit(1);
+        }
+
+        _ = services.AddSingleton(registration);
+
+        return services;
+    }
+
+    /// <summary>
+    /// Injects the registration into the application service. Loads the registration from configuration beforehand.
+    /// </summary>
+    /// <param name="services">The application services existing service collection.</param>
+    /// <param name="configuration">The application services configuration.</param>
+    public static IServiceCollection AddAppServiceRegistration(this IServiceCollection services, IConfiguration configuration)
+    {
+        var registration = RegistrationService.LoadRegistrationFromConfiguration(configuration);
+
+        if (registration is null)
+        {
+            Console.WriteLine("Registration is not valid!");
+            Environment.Exit(1);
+        }
+
+        _ = services.AddSingleton(registration);
+
+        return services;
+    }
+
+    /// <summary>
     /// Injects services to use the application services endpoints.
     /// </summary>
     /// <param name="services">The application services existing service collection.</param>
-    /// <param name="options">The application services endpoint options.</param>
-    public static IServiceCollection AddAppServiceEndpoints(this IServiceCollection services, AppServiceEndpointOptions options)
+    /// <param name="settings">The application services endpoint options.</param>
+    public static IServiceCollection AddAppServiceEndpoints(this IServiceCollection services, Action<AppServiceEndpointSettings> settings)
     {
-        _ = services.AddSingleton(options);
+        var endpointSettings = new AppServiceEndpointSettings();
+        settings(endpointSettings);
+
+        _ = services.AddSingleton(endpointSettings);
         _ = services.AddFastEndpoints();
 
         _ = services.AddSwaggerDoc(settings =>
-        {
-            settings.Title = "Application Service API";
-            settings.Version = "v1";
-        },
-        serializer =>
-        {
-            serializer.PropertyNamingPolicy = null;
-            serializer.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-        },
-        shortSchemaNames: true,
-        addJWTBearerAuth: false);
+            {
+                settings.Title = "Application Service API";
+                settings.Version = "v1";
+            },
+            serializer =>
+            {
+                serializer.PropertyNamingPolicy = null;
+                serializer.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            },
+            shortSchemaNames: true,
+            addJWTBearerAuth: false);
 
         return services;
     }
@@ -51,13 +94,13 @@ public static class Startup
     {
         _ = app.UseMiddleware<HttpExceptionMiddleware>();
 
-        var options = app.Services.GetRequiredService<AppServiceEndpointOptions>();
+        var registration = app.Services.GetRequiredService<Registration>();
 
         _ = app.UseFastEndpoints(c =>
         {
             c.Serializer.Options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
             c.Endpoints.ShortNames = true;
-            c.Endpoints.Configurator = ep => ep.PreProcessors(new AuthPreProcessor(options));
+            c.Endpoints.Configurator = ep => ep.PreProcessors(new AuthPreProcessor(registration));
         });
 
         _ = app.UseOpenApi();

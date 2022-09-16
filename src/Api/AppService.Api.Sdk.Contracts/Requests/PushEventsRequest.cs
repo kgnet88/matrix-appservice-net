@@ -6,8 +6,14 @@
 /// <seealso href="https://spec.matrix.org/v1.3/application-service-api/#pushing-events">
 /// Transaction API for sending a list of events
 /// </seealso>
-public sealed record PushEventsRequest : BaseRequest
+public sealed record PushEventsRequest : IRequest
 {
+    /// <summary>
+    /// Homeservers MUST include a query parameter named <c>access_token</c> containing the <c>hs_token</c> from the
+    /// application service’s registration when making requests to the application service.
+    /// </summary>
+    public string AccessToken { get; set; } = default!;
+
     /// <summary>
     /// <b>Required</b>: A list of events, formatted as per the Client-Server API.
     /// </summary>

@@ -17,7 +17,12 @@ public sealed class ExistRoomAliasSummary : Summary<ExistRoomAliasEndpoint, Exis
             "application service’s aliases namespace. The homeserver will send this request when it receives a " +
             "request to join a room alias within the application service’s namespace.";
 
-        this.ExampleRequest = new ExistRoomAliasRequest() { RoomAlias = "#alias:example.com" };
+        this.RequestParam(x => x.AccessToken, "Access token containing the <c>hs_token</c> from " +
+            "the application service’s registration");
+
+        this.RequestParam(x => x.RoomAlias, "<b>Required:</b> The room alias being queried.");
+
+        this.ExampleRequest = new ExistRoomAliasRequest() { RoomAlias = "alias" };
 
         this.Response(200, "The application service indicates that this room alias exists.");
         this.Response(401, "The homeserver has not supplied credentials to the application service.");

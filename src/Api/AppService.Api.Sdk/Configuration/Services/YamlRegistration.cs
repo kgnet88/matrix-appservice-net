@@ -33,7 +33,7 @@ internal sealed class YamlRegistration
     /// <b>Required</b>: The localpart of the user associated with the application service.
     /// </summary>
     [YamlMember(Alias = "sender_localpart", ApplyNamingConventions = false)]
-    public string LocalPart { get; set; } = default!;
+    public string Localpart { get; set; } = default!;
 
     /// <summary>
     /// <b>Required</b>: A list of users, aliases and rooms namespaces that the application service controls.
