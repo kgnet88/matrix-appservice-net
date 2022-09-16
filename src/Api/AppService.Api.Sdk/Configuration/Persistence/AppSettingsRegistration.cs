@@ -1,4 +1,4 @@
-﻿namespace KgNet88.Matrix.AppService.Api.Sdk.Configuration.Services;
+﻿namespace KgNet88.Matrix.AppService.Api.Sdk.Configuration.Persistence;
 
 internal sealed record AppSettingsRegistration
 {

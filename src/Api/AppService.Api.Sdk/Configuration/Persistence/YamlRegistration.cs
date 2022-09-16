@@ -1,4 +1,4 @@
-﻿namespace KgNet88.Matrix.AppService.Api.Sdk.Configuration.Services;
+﻿namespace KgNet88.Matrix.AppService.Api.Sdk.Configuration.Persistence;
 
 /// <summary>
 /// Configuration file to register an application service on the homeserver.
