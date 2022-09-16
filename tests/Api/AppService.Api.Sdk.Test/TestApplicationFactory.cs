@@ -18,7 +18,7 @@ public sealed class TestApplicationFactory<TStartup> : WebApplicationFactory<TSt
 
             descriptor = services.SingleOrDefault(
                 d => d.ServiceType ==
-                    typeof(AppServiceEndpointOptions));
+                    typeof(AppServiceEndpointSettings));
 
             _ = services.Remove(descriptor!);
 
@@ -44,11 +44,10 @@ public sealed class TestApplicationFactory<TStartup> : WebApplicationFactory<TSt
         };
     }
 
-    public AppServiceEndpointOptions GetOptions()
+    public AppServiceEndpointSettings GetOptions()
     {
-        return new AppServiceEndpointOptions
+        return new AppServiceEndpointSettings
         {
-            HomeserverToken = Token.From((TokenType.Homeserver, _accessToken)),
             OnPushEventsQueryAsync = (_, _, _) => Task.CompletedTask,
             OnExistUserQueryAsync = (req, _) => req.UserId == "user"
                     ? Task.FromResult<(HttpStatusCode, string?)>((HttpStatusCode.OK, null))

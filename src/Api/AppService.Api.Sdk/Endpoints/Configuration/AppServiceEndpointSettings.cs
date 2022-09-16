@@ -3,13 +3,8 @@
 /// <summary>
 /// Options to proper initialize all endpoints.
 /// </summary>
-public sealed class AppServiceEndpointOptions
+public sealed class AppServiceEndpointSettings
 {
-    /// <summary>
-    /// A unique token for Homeservers to use to authenticate requests to application services.
-    /// </summary>
-    public Token HomeserverToken { get; set; } = default!;
-
     /// <summary>
     /// Delegate to implement your own handler for the application services query for
     /// <see href="https://spec.matrix.org/v1.3/application-service-api/#get_matrixappv1roomsroomalias">room aliases</see>.

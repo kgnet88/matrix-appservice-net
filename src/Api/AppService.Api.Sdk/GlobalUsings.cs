@@ -12,6 +12,7 @@ global using FastEndpoints.Swagger;
 global using FluentValidation.Results;
 
 global using KgNet88.Matrix.AppService.Api.Sdk.Configuration.Model;
+global using KgNet88.Matrix.AppService.Api.Sdk.Configuration.Services;
 global using KgNet88.Matrix.AppService.Api.Sdk.Contracts.Errors;
 global using KgNet88.Matrix.AppService.Api.Sdk.Contracts.Requests;
 global using KgNet88.Matrix.AppService.Api.Sdk.Endpoints.Configuration;
@@ -20,6 +21,7 @@ global using KgNet88.Matrix.AppService.Api.Sdk.Middleware;
 
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Http;
+global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 
 global using ValueOf;
