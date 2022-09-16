@@ -12,7 +12,7 @@ global using FastEndpoints.Swagger;
 global using FluentValidation.Results;
 
 global using KgNet88.Matrix.AppService.Api.Sdk.Configuration.Model;
-global using KgNet88.Matrix.AppService.Api.Sdk.Configuration.Services;
+global using KgNet88.Matrix.AppService.Api.Sdk.Configuration.Persistence;
 global using KgNet88.Matrix.AppService.Api.Sdk.Contracts.Errors;
 global using KgNet88.Matrix.AppService.Api.Sdk.Contracts.Requests;
 global using KgNet88.Matrix.AppService.Api.Sdk.Endpoints.Configuration;
