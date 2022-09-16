@@ -3,7 +3,7 @@
 /// <summary>
 /// Strong typed and validated application service localpart.
 /// </summary>
-public sealed class SenderLocalpart : ValueOf<string, SenderLocalpart>
+internal sealed class SenderLocalpart : ValueOf<string, SenderLocalpart>
 {
     /// <summary>
     /// Tries to validate if the initialization value is a valid application service localpart. If the value is not a

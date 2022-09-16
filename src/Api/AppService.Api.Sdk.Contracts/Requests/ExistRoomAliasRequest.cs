@@ -6,7 +6,7 @@
 /// <seealso href="https://spec.matrix.org/v1.3/application-service-api/#get_matrixappv1roomsroomalias">
 /// Querying API for room aliases
 /// </seealso>
-public sealed record ExistRoomAliasRequest : IRequest
+public sealed record ExistRoomAliasRequest : IHomeserverRequest
 {
     /// <summary>
     /// Homeservers MUST include a query parameter named <c>access_token</c> containing the <c>hs_token</c> from the

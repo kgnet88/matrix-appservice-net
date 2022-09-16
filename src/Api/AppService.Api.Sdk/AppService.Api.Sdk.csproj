@@ -25,11 +25,25 @@
 
 	<ItemGroup>
 		<PackageReference Include="FastEndpoints.Swagger" Version="5.1.0" />
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="ValueOf" Version="2.0.31" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\AppService.Api.Sdk.Contracts\AppService.Api.Sdk.Contracts.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+			<_Parameter1>AppService.Api.Sdk.Test</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<ItemGroup>
+		<AdditionalFiles Include="..\..\..\stylecop.json" Link="stylecop.json" />
 	</ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@
 /// <summary>
 /// Strong typed and validated application service url.
 /// </summary>
-public sealed class Url : ValueOf<string, Url>
+internal sealed class Url : ValueOf<string, Url>
 {
     /// <summary>
     /// Tries to validate if the initialization value is a valid application service url. If the value is not a valid

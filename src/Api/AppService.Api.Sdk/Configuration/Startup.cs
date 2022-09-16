@@ -6,38 +6,6 @@
 public static class Startup
 {
     /// <summary>
-    /// Injects the registration into the application service
-    /// </summary>
-    /// <param name="services">The application services existing service collection.</param>
-    /// <param name="registration">The application services registration.</param>
-    public static IServiceCollection AddAppServiceRegistration(this IServiceCollection services, Registration registration)
-    {
-        _ = services.AddSingleton(registration);
-
-        return services;
-    }
-
-    /// <summary>
-    /// Injects the registration into the application service. Loads the registration from file beforehand.
-    /// </summary>
-    /// <param name="services">The application services existing service collection.</param>
-    /// <param name="registrationPath">The application services registration file.</param>
-    public static IServiceCollection AddAppServiceRegistration(this IServiceCollection services, string registrationPath)
-    {
-        var registration = RegistrationService.LoadRegistrationFromFile(registrationPath);
-
-        if (registration is null)
-        {
-            Console.WriteLine("Registration is not valid!");
-            Environment.Exit(1);
-        }
-
-        _ = services.AddSingleton(registration);
-
-        return services;
-    }
-
-    /// <summary>
     /// Injects the registration into the application service. Loads the registration from configuration beforehand.
     /// </summary>
     /// <param name="services">The application services existing service collection.</param>

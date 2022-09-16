@@ -32,7 +32,7 @@ public sealed class PushEventsEndpoint : Endpoint<PushEventsRequest>
     /// </seealso>
     public override void Configure()
     {
-        this.Put("_matrix/app/v1/transactions/{txnId}");
+        this.Put("transactions/{txnId}", "_matrix/app/v1/transactions/{txnId}");
         this.AllowAnonymous();
     }
 
@@ -40,8 +40,8 @@ public sealed class PushEventsEndpoint : Endpoint<PushEventsRequest>
     /// the handler method for the endpoint. this method is called for each request received. It delegates the work to
     /// the user defined handler and processes its result.
     /// </summary>
-    /// <param name="req">the request dto</param>
-    /// <param name="ct">a cancellation token</param>
+    /// <param name="req">the request dto.</param>
+    /// <param name="ct">a cancellation token.</param>
     public override async Task HandleAsync(PushEventsRequest req, CancellationToken ct)
     {
         long txnId = this.Route<int>("txnId");

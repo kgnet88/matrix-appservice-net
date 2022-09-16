@@ -10,45 +10,50 @@
 public sealed class HttpException : Exception
 {
     /// <summary>
-    /// The http status code for the response type.
+    /// Gets the http status code for the response type.
     /// </summary>
     public HttpStatusCode StatusCode { get; }
 
     /// <summary>
-    /// The error code string will be a unique string which can be used to handle an error message.
+    /// Gets the error code string will be a unique string which can be used to handle an error message.
     /// </summary>
     public string ErrorCode { get; }
 
     /// <summary>
-    /// The error string will be a human-readable error message, usually a sentence explaining what went wrong.
+    /// Gets the error string will be a human-readable error message, usually a sentence explaining what went wrong.
     /// </summary>
     public string Error => this.Message;
 
     /// <summary>
-    /// Constructs a valid standard exception without user defined error message.
+    /// Initializes a new instance of the <see cref="HttpException"/> class.
+    /// Initializes a valid standard exception without user defined error message.
     /// </summary>
     /// <param name="errorCode">The responses error code.</param>
     /// <param name="statusCode">The responses http status code.</param>
-    public HttpException(string errorCode, HttpStatusCode statusCode) : base(errorCode)
+    public HttpException(string errorCode, HttpStatusCode statusCode)
+        : base(errorCode)
     {
         this.ErrorCode = errorCode;
         this.StatusCode = statusCode;
     }
 
     /// <summary>
-    /// Constructs a valid standard exception with user defined error message.
+    /// Initializes a new instance of the <see cref="HttpException"/> class.
+    /// Initializes a valid standard exception with user defined error message.
     /// </summary>
     /// <param name="errorCode">The responses error code.</param>
     /// <param name="error">User defined error message.</param>
     /// <param name="statusCode">The responses http status code.</param>
-    public HttpException(string errorCode, string error, HttpStatusCode statusCode) : base(error)
+    public HttpException(string errorCode, string error, HttpStatusCode statusCode)
+        : base(error)
     {
         this.ErrorCode = errorCode;
         this.StatusCode = statusCode;
     }
 
     /// <summary>
-    /// Constructs a valid standard exception with user defined error message and inner exception.
+    /// Initializes a new instance of the <see cref="HttpException"/> class.
+    /// Initializes a valid standard exception with user defined error message and inner exception.
     /// </summary>
     /// <param name="errorCode">The responses error code.</param>
     /// <param name="error">User defined error message.</param>
@@ -58,22 +63,24 @@ public sealed class HttpException : Exception
         string errorCode,
         string error,
         HttpStatusCode statusCode,
-        Exception? innerException) : base(error, innerException)
+        Exception? innerException)
+        : base(error, innerException)
     {
         this.ErrorCode = errorCode;
         this.StatusCode = statusCode;
     }
 
     /// <summary>
-    /// Constructs a valid standard Exception by deserialization.
+    /// Initializes a new instance of the <see cref="HttpException"/> class.
+    /// Initializes a valid standard Exception by deserialization.
     /// </summary>
     /// <param name="info">Holds the serialized exception data.</param>
     /// <param name="context">The serialization context.</param>
     private HttpException(SerializationInfo info, StreamingContext context)
             : base(info, context)
     {
-        this.StatusCode = (HttpStatusCode)info.GetValue(nameof(this.StatusCode), typeof(HttpStatusCode))!;
-        this.ErrorCode = info.GetString(nameof(this.ErrorCode))!;
+        this.StatusCode = (HttpStatusCode)info.GetValue(nameof(this.StatusCode), typeof(HttpStatusCode)) !;
+        this.ErrorCode = info.GetString(nameof(this.ErrorCode)) !;
     }
 
     /// <summary>

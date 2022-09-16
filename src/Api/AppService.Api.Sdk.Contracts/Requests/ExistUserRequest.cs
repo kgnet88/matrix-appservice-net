@@ -6,7 +6,7 @@
 /// <seealso href="https://spec.matrix.org/v1.3/application-service-api/#get_matrixappv1usersuserid">
 /// Querying API for user IDs
 /// </seealso>
-public sealed record ExistUserRequest : IRequest
+public sealed record ExistUserRequest : IHomeserverRequest
 {
     /// <summary>
     /// Homeservers MUST include a query parameter named <c>access_token</c> containing the <c>hs_token</c> from the

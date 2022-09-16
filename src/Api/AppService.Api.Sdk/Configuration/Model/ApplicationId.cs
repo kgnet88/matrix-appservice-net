@@ -3,7 +3,7 @@
 /// <summary>
 /// Strong typed and validated application service Id.
 /// </summary>
-public sealed class ApplicationId : ValueOf<string, ApplicationId>
+internal sealed class ApplicationId : ValueOf<string, ApplicationId>
 {
     /// <summary>
     /// Tries to validate if the initialization value is a valid application service id. If the value is not a valid id,

@@ -41,19 +41,20 @@ public sealed class ExistUserEndpoint : Endpoint<ExistUserRequest>
     /// the handler method for the endpoint. this method is called for each request received. It delegates the work to
     /// the user defined handler and processes its result.
     /// </summary>
-    /// <param name="req">the request dto</param>
-    /// <param name="ct">a cancellation token</param>
+    /// <param name="req">the request dto.</param>
+    /// <param name="ct">a cancellation token.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
     public override async Task HandleAsync(ExistUserRequest req, CancellationToken ct)
     {
-        var (Code, Error) = await this._options.OnExistUserQueryAsync(req, ct);
+        var (code, error) = await this._options.OnExistUserQueryAsync(req, ct);
 
-        switch (Code)
+        switch (code)
         {
             case HttpStatusCode.OK:
                 await this.SendOkAsync(ct);
                 break;
             case HttpStatusCode.NotFound:
-                throw HttpErrors.UserNotFound(req.UserId, Error);
+                throw HttpErrors.UserNotFound(req.UserId, error);
             default:
                 throw new NotImplementedException();
         }

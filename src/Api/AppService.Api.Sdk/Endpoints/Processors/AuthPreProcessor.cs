@@ -1,5 +1,8 @@
 ﻿namespace KgNet88.Matrix.AppService.Api.Sdk.Endpoints.Processors;
 
+/// <summary>
+/// Preprocessor to authorize valid homeserver requests.
+/// </summary>
 internal sealed class AuthPreProcessor : IGlobalPreProcessor
 {
     /// <summary>
@@ -16,7 +19,14 @@ internal sealed class AuthPreProcessor : IGlobalPreProcessor
         this._registration = registration;
     }
 
-    public Task PreProcessAsync(object req, HttpContext ctx, List<ValidationFailure> failures, CancellationToken ct)
+    /// <summary>
+    /// The preprocessor validates the requests query parameter <c>access_token</c> to authorize it.
+    /// </summary>
+    /// <param name="request">The current request.</param>
+    /// <param name="ctx">The current http context.</param>
+    /// <param name="failures">A list of all current validation failures.</param>
+    /// <param name="ct">The current cancellation token.</param>
+    public Task PreProcessAsync(object request, HttpContext ctx, List<ValidationFailure> failures, CancellationToken ct)
     {
         if (!ctx.Request.Query.ContainsKey("access_token"))
         {

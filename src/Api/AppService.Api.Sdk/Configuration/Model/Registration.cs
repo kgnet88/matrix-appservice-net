@@ -3,7 +3,7 @@
 /// <summary>
 /// Configuration file to register an application service on the homeserver.
 /// </summary>
-public class Registration
+internal sealed class Registration
 {
     /// <summary>
     /// <b>Required</b>: A unique, user-defined ID of the application service which will never change.

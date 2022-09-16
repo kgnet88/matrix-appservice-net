@@ -6,7 +6,7 @@
 /// <seealso href="https://spec.matrix.org/v1.3/application-service-api/#pushing-events">
 /// Transaction API for sending a list of events
 /// </seealso>
-public sealed record PushEventsRequest : IRequest
+public sealed record PushEventsRequest : IHomeserverRequest
 {
     /// <summary>
     /// Homeservers MUST include a query parameter named <c>access_token</c> containing the <c>hs_token</c> from the

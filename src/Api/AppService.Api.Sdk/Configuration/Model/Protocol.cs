@@ -3,7 +3,7 @@
 /// <summary>
 /// Strong typed and validated application service protocol.
 /// </summary>
-public sealed class Protocol : ValueOf<string, Protocol>
+internal sealed class Protocol : ValueOf<string, Protocol>
 {
     /// <summary>
     /// Tries to validate if the initialization value is a valid application service protocol. If the value is not a
