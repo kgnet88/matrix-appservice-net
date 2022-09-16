@@ -3,7 +3,7 @@
 /// <summary>
 /// Strong typed and validated application service namespace.
 /// </summary>
-public sealed class Namespace : ValueOf<NamespaceFields, Namespace>
+internal sealed class Namespace : ValueOf<NamespaceFields, Namespace>
 {
     /// <summary>
     /// Tries to validate if the initialization value is a valid application service namespace. If the value is not a

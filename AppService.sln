@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		LICENSE = LICENSE
 		README.md = README.md
+		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{D339E9FC-4B80-439E-8CDE-57457A03CD10}"
@@ -31,11 +32,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "notes", "notes", "{A12FDBAC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx", "docfx", "{118F5E58-107E-4B74-B495-785ECBDD8F6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppService.Api.Example", "src\Api\AppService.Api.Example\AppService.Api.Example.csproj", "{602DF0C0-EE5D-445C-BB5C-E907D94CC273}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppService.Api.Example", "src\Api\AppService.Api.Example\AppService.Api.Example.csproj", "{602DF0C0-EE5D-445C-BB5C-E907D94CC273}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{9C15AEAD-5885-4520-9E76-E2F987530F05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppService.Api.Sdk.Test", "tests\Api\AppService.Api.Sdk.Test\AppService.Api.Sdk.Test.csproj", "{94372534-6D72-4E14-8982-F54C7B24F36B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppService.Api.Sdk.Test", "tests\Api\AppService.Api.Sdk.Test\AppService.Api.Sdk.Test.csproj", "{94372534-6D72-4E14-8982-F54C7B24F36B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

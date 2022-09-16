@@ -21,6 +21,15 @@ public sealed class PushEventsEndpointTest : AbstractEndpointTestTemplate
             });
 
         _ = response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        response = await client.PutAsJsonAsync(
+            $"transactions/122?access_token={AccessToken}",
+            new PushEventsRequest
+            {
+                ClientEvents = new List<ClientEvent>()
+            });
+
+        _ = response.StatusCode.Should().Be(HttpStatusCode.OK);
     }
 
     // unauthorized failure test (status: 401)
@@ -40,6 +49,19 @@ public sealed class PushEventsEndpointTest : AbstractEndpointTestTemplate
         var result = await response.Content.ReadFromJsonAsync<ErrorResponse>();
         _ = result!.ErrorCode.Should().Be(HttpErrorCodes.APP_SERVICE_NOT_AUTHORIZED.FromCode());
         _ = result!.ErrorMessage.Should().Be("Missing access token.");
+
+        response = await client.PutAsJsonAsync(
+            "transactions/122",
+            new PushEventsRequest
+            {
+                ClientEvents = new List<ClientEvent>()
+            });
+
+        _ = response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+
+        result = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+        _ = result!.ErrorCode.Should().Be(HttpErrorCodes.APP_SERVICE_NOT_AUTHORIZED.FromCode());
+        _ = result!.ErrorMessage.Should().Be("Missing access token.");
     }
 
     // invalid credentials failure test (status: 403)
@@ -57,6 +79,19 @@ public sealed class PushEventsEndpointTest : AbstractEndpointTestTemplate
         _ = response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
 
         var result = await response.Content.ReadFromJsonAsync<ErrorResponse>();
+        _ = result!.ErrorCode.Should().Be(HttpErrorCodes.APP_SERVICE_FORBIDDEN.FromCode());
+        _ = result!.ErrorMessage.Should().Be("Invalid access token.");
+
+        response = await client.PutAsJsonAsync(
+            $"transactions/122?access_token={AccessToken + 2}",
+            new PushEventsRequest
+            {
+                ClientEvents = new List<ClientEvent>()
+            });
+
+        _ = response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
+
+        result = await response.Content.ReadFromJsonAsync<ErrorResponse>();
         _ = result!.ErrorCode.Should().Be(HttpErrorCodes.APP_SERVICE_FORBIDDEN.FromCode());
         _ = result!.ErrorMessage.Should().Be("Invalid access token.");
     }

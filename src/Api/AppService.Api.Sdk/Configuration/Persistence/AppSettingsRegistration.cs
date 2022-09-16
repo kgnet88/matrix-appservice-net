@@ -1,5 +1,8 @@
 ﻿namespace KgNet88.Matrix.AppService.Api.Sdk.Configuration.Persistence;
 
+/// <summary>
+/// Configuration object for the registration.
+/// </summary>
 internal sealed record AppSettingsRegistration
 {
     /// <summary>
@@ -48,6 +51,9 @@ internal sealed record AppSettingsRegistration
     public List<string> Protocols { get; set; } = new();
 }
 
+/// <summary>
+/// Represents all namespaces inside a registration.
+/// </summary>
 internal sealed class AppSettingNamespaces
 {
     /// <summary>
@@ -66,6 +72,9 @@ internal sealed class AppSettingNamespaces
     public List<AppSettingsNamespace> Rooms { get; set; } = new();
 }
 
+/// <summary>
+/// Represents a namespace inside a registration.
+/// </summary>
 internal sealed record AppSettingsNamespace
 {
     /// <summary>

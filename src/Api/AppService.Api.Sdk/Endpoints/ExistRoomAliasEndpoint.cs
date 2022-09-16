@@ -41,19 +41,19 @@ public sealed class ExistRoomAliasEndpoint : Endpoint<ExistRoomAliasRequest>
     /// the handler method for the endpoint. this method is called for each request received. It delegates the work to
     /// the user defined handler and processes its result.
     /// </summary>
-    /// <param name="req">the request dto</param>
-    /// <param name="ct">a cancellation token</param>
+    /// <param name="req">the request dto.</param>
+    /// <param name="ct">a cancellation token.</param>
     public override async Task HandleAsync(ExistRoomAliasRequest req, CancellationToken ct)
     {
-        var (Code, Error) = await this._options.OnExistRoomAliasQueryAsync(req, ct);
+        var (code, error) = await this._options.OnExistRoomAliasQueryAsync(req, ct);
 
-        switch (Code)
+        switch (code)
         {
             case HttpStatusCode.OK:
                 await this.SendOkAsync(ct);
                 break;
             case HttpStatusCode.NotFound:
-                throw HttpErrors.RoomAliasNotFound(req.RoomAlias, Error);
+                throw HttpErrors.RoomAliasNotFound(req.RoomAlias, error);
             default:
                 throw new NotImplementedException();
         }

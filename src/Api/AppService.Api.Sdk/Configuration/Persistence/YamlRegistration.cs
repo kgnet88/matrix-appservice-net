@@ -54,6 +54,9 @@ internal sealed class YamlRegistration
     public List<string> Protocols { get; set; } = default!;
 }
 
+/// <summary>
+/// Represents a namespace inside registration.
+/// </summary>
 internal sealed class YamlNamespace
 {
     /// <summary>
@@ -70,6 +73,9 @@ internal sealed class YamlNamespace
     public string Regex { get; set; } = default!;
 }
 
+/// <summary>
+/// Represents all namespaces inside a registration.
+/// </summary>
 internal sealed class YamlNamespaces
 {
     /// <summary>

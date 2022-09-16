@@ -3,7 +3,7 @@
 /// <summary>
 /// Strong typed and validated access or homeserver token.
 /// </summary>
-public sealed class Token : ValueOf<(TokenType Type, string Token), Token>
+internal sealed class Token : ValueOf<(TokenType Type, string Token), Token>
 {
     /// <summary>
     /// Tries to validate if the initialization value is a valid homeserver or access token. If the value is not a

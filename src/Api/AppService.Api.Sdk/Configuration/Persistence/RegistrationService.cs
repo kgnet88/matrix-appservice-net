@@ -3,7 +3,7 @@
 /// <summary>
 /// SDKs default implementation of the registration service.
 /// </summary>
-public static class RegistrationService
+internal static class RegistrationService
 {
     /// <summary>
     /// The service tries to load a valid application service registration from the yaml file at the specified path.
@@ -28,7 +28,7 @@ public static class RegistrationService
             ? null
             : new Registration
             {
-                Id = Model.ApplicationId.From(yamlRegistration.Id),
+                Id = ApplicationId.From(yamlRegistration.Id),
                 Url = Url.From(yamlRegistration.Url),
                 AccessToken = Token.From((TokenType.Access, yamlRegistration.AccessToken)),
                 HomeserverToken = Token.From((TokenType.Homeserver, yamlRegistration.HomeserverToken)),
@@ -47,7 +47,7 @@ public static class RegistrationService
     /// <summary>
     /// The service tries to load a valid application service registration from the configuration file.
     /// </summary>
-    /// <param name="configuration"></param>
+    /// <param name="configuration">A valid application services configuration.</param>
     /// <returns>If successful it returns the loaded application service registration.</returns>
     public static Registration? LoadRegistrationFromConfiguration(IConfiguration configuration)
     {
@@ -63,7 +63,7 @@ public static class RegistrationService
 
         return new Registration
         {
-            Id = Model.ApplicationId.From(appServiceRegistration.Id),
+            Id = ApplicationId.From(appServiceRegistration.Id),
             Url = Url.From(appServiceRegistration.Url),
             AccessToken = Token.From((TokenType.Access, appServiceRegistration.AccessToken)),
             HomeserverToken = Token.From((TokenType.Homeserver, appServiceRegistration.HomeserverToken)),
@@ -115,6 +115,6 @@ public static class RegistrationService
     /// <returns>A random token string.</returns>
     public static string GenerateToken()
     {
-        return (Guid.NewGuid() + Guid.NewGuid().ToString()).Replace("-", "");
+        return (Guid.NewGuid() + Guid.NewGuid().ToString()).Replace("-", string.Empty);
     }
 }

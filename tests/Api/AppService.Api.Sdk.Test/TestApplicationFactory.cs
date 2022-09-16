@@ -2,10 +2,10 @@
 
 public sealed class TestApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
 {
-    private const string _accessToken = "Nc-T87ejp0mFtmFeQg2RQAEYUsFy11ekKH4znqQ7OAzw";
-
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        var configuration = InitConfiguration();
+
         _ = builder.ConfigureServices(services =>
         {
             var descriptor = services.SingleOrDefault(
@@ -14,7 +14,7 @@ public sealed class TestApplicationFactory<TStartup> : WebApplicationFactory<TSt
 
             _ = services.Remove(descriptor!);
 
-            _ = services.AddAppServiceRegistration(this.GetRegistration());
+            _ = services.AddAppServiceRegistration(configuration);
 
             descriptor = services.SingleOrDefault(
                 d => d.ServiceType ==
@@ -22,29 +22,13 @@ public sealed class TestApplicationFactory<TStartup> : WebApplicationFactory<TSt
 
             _ = services.Remove(descriptor!);
 
-            var options = this.GetOptions();
+            var options = GetOptions();
 
             _ = services.AddSingleton(options);
         });
     }
 
-    public Registration GetRegistration()
-    {
-        return new Registration
-        {
-            Id = AppId.From("ExampleService"),
-            Url = Url.From("example.com"),
-            AccessToken = Token.From((TokenType.Access, _accessToken)),
-            HomeserverToken = Token.From((TokenType.Homeserver, _accessToken)),
-            Localpart = SenderLocalpart.From("motu"),
-            Aliases = new List<Namespace>(),
-            Rooms = new List<Namespace>(),
-            Users = new List<Namespace>(),
-            RateLimited = false
-        };
-    }
-
-    public AppServiceEndpointSettings GetOptions()
+    private static AppServiceEndpointSettings GetOptions()
     {
         return new AppServiceEndpointSettings
         {
@@ -56,5 +40,22 @@ public sealed class TestApplicationFactory<TStartup> : WebApplicationFactory<TSt
                     ? Task.FromResult<(HttpStatusCode, string?)>((HttpStatusCode.OK, null))
                     : Task.FromResult<(HttpStatusCode, string?)>((HttpStatusCode.NotFound, "room alias does not exist, try again"))
         };
+    }
+
+    private static IConfiguration InitConfiguration()
+    {
+        return new ConfigurationBuilder()
+           .AddJsonFile(Path.Combine(ContentRootPath(), "testconfig.json"))
+           .Build();
+    }
+
+    private static string ContentRootPath()
+    {
+        string rootDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        if (rootDirectory.Contains("bin"))
+        {
+            rootDirectory = rootDirectory[..rootDirectory.IndexOf("bin")];
+        }
+        return rootDirectory;
     }
 }

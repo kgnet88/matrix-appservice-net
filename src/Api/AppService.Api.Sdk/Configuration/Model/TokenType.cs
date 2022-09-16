@@ -3,7 +3,7 @@
 /// <summary>
 /// Type of a given unique token.
 /// </summary>
-public enum TokenType
+internal enum TokenType
 {
     /// <summary>
     /// Given token is unique token for a homeserver.

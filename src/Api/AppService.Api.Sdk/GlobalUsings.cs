@@ -28,4 +28,5 @@ global using ValueOf;
 
 global using YamlDotNet.Serialization;
 
+global using ApplicationId = KgNet88.Matrix.AppService.Api.Sdk.Configuration.Model.ApplicationId;
 global using ErrorResponse = KgNet88.Matrix.AppService.Api.Sdk.Contracts.Responses.ErrorResponse;
