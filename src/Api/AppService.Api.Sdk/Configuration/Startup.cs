@@ -22,6 +22,26 @@ public static class Startup
 
         _ = services.AddSingleton(registration);
 
+        var section = configuration.GetSection(RegistrationSynapseOutput.Section);
+
+        if (section is null)
+        {
+            return services;
+        }
+
+        var output = new RegistrationSynapseOutput();
+        section.Bind(output);
+
+        if (!output.DoPersist)
+        {
+            return services;
+        }
+
+        if (Directory.Exists(output.Path))
+        {
+            RegistrationService.WriteRegistrationToFile(registration, output.Path);
+        }
+
         return services;
     }
 

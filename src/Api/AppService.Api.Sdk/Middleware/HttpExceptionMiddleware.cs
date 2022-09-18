@@ -13,12 +13,19 @@ internal sealed class HttpExceptionMiddleware
     private readonly RequestDelegate _request;
 
     /// <summary>
+    /// Application services registration.
+    /// </summary>
+    private readonly Registration _registration;
+
+    /// <summary>
     /// Injects a delegate to process the current request.
     /// </summary>
     /// <param name="request">Delegate for the current request.</param>
-    public HttpExceptionMiddleware(RequestDelegate request)
+    /// <param name="registration">Application services registration.</param>
+    public HttpExceptionMiddleware(RequestDelegate request, Registration registration)
     {
         this._request = request;
+        this._registration = registration;
     }
 
     /// <summary>
@@ -35,7 +42,16 @@ internal sealed class HttpExceptionMiddleware
         catch (HttpException exception)
         {
             context.Response.StatusCode = (int)exception.StatusCode;
-            await context.Response.WriteAsJsonAsync(new ErrorResponse { ErrorCode = exception.ErrorCode, ErrorMessage = exception.Error });
+
+            string appNamespace = this._registration.Url.Value
+                .Split(":")[1]
+                .Replace("//", string.Empty)
+                .Replace('.', '_')
+                .ToUpper();
+
+            string errorCode = exception.ErrorCode.Replace("APP_SERVICE", appNamespace);
+
+            await context.Response.WriteAsJsonAsync(new ErrorResponse { ErrorCode = errorCode, ErrorMessage = exception.Error });
         }
     }
 }
